@@ -11,12 +11,16 @@
  *
  * This engine makes the canvas' context (ctx) object globally available to make 
  * writing app.js a little simpler to work with.
- */
+* Engine.js
+  *该文件提供游戏循环功能（更新实体和渲染），在屏幕上绘制初始游戏板，然后调用播放器和敌对对象（在您的app.js中定义）中的update andrender方法。 一个游戏引擎的工作原理是遍及整个游戏画面，就像一个你可能创建的一本小孩一样的翻页。 当您的播放器在屏幕上移动时，它可能看起来就像该图像/角色正在移动或被绘制，但情况并非如此。 真正发生的是整个“场景”被一再画出来，呈现出动画的幻觉。这个引擎使画布的上下文（ctx）对象全局可用，使得编写app.js更简单一些。
+ */
+
 
 var Engine = (function(global) {
     /* Predefine the variables we'll be using within this scope,
      * create the canvas element, grab the 2D context for that canvas
      * set the canvas elements height/width and add it to the DOM.
+     * 预定义我们将在此范围内使用的变量，创建画布元素，抓取该画布的2D上下文设置画布元素的高度/宽度并将其添加到DOM。
      */
     var doc = global.document,
         win = global.window,
@@ -30,6 +34,7 @@ var Engine = (function(global) {
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
+     * 此功能用作游戏循环本身的启动点，并处理正确调用更新和呈现方法。
      */
     function main() {
         /* Get our time delta information which is required if your game
@@ -37,23 +42,27 @@ var Engine = (function(global) {
          * instructions at different speeds we need a constant value that
          * would be the same for everyone (regardless of how fast their
          * computer is) - hurray time!
+         * 获取我们的时间增量信息，如果您的游戏需要流畅的动画，则需要它 因为每个人的计算机都以不同的速度处理指令，我们需要一个恒定的值，对于每个人来说都是一样的（不管他们的电脑有多快） - 赶快时间！
          */
         var now = Date.now(),
             dt = (now - lastTime) / 1000.0;
 
         /* Call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
+         * 调用我们的更新/渲染功能，将时间增量传递给我们的更新功能，因为它可以用于平滑动画。
          */
         update(dt);
         render();
 
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
+         * 设置我们的lastTime变量，用于确定下次调用此函数的时间增量。
          */
         lastTime = now;
 
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
+         * 浏览器的requestAnimationFrame函数可以在浏览器能够绘制另一个帧之后再次调用此函数。
          */
         win.requestAnimationFrame(main);
     }

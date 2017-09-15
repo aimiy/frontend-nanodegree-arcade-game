@@ -3,6 +3,7 @@
  * image files so that they can be used within your game. It also includes
  * a simple "caching" layer so it will reuse cached images if you attempt
  * to load the same image multiple times.
+ * 这只是一个图像加载实用程序。 它可以简化加载图像文件的过程，以便在游戏中使用它们。 它还包括一个简单的“缓存”层，如果您尝试多次加载相同的图像，它将重新使用高速缓存的图像。
  */
 (function() {
     var resourceCache = {};
